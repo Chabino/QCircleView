@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="309dp"
+    android:layout_height="307dp"
+    tools:context="ah.hathi.simpleweather.WeatherActivity"
+    android:layout_gravity="center_horizontal"
+    tools:ignore="MergeRootFrame"
+    android:background="#FF0099CC">
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageButton2"
+        android:layout_gravity="right|center_vertical"
+        android:focusableInTouchMode="false"
+        android:layout_marginRight="40dp"
+        android:background="@android:drawable/ic_menu_compass"
+        android:layout_marginTop="70dp" />
+
+    <ImageButton
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:id="@+id/retour12"
+        android:background="@drawable/ic_sysbar_back_dark_normal"
+        android:layout_gravity="bottom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Click to found \n City by GPS"
+        android:id="@+id/text1"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp" />
+
+</FrameLayout>

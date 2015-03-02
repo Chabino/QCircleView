@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="304dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <AnalogClock
+            android:layout_width="wrap_content"
+            android:layout_height="304dp"
+            android:id="@+id/analogClock"
+            android:layout_gravity="center_horizontal"
+            android:dial="@drawable/b2_quickcircle_analog_style03_bg"
+            android:hand_hour="@drawable/b2_quickcircle_analog_style03_hour"
+            android:hand_minute="@drawable/b2_quickcircle_analog_style03_minute" />
+
+        <ImageView
+            android:src="@drawable/b2_quickcircle_analog_style03_second"
+            android:id="@+id/imgsecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal" />
+
+        <TextClock
+            android:layout_width="65dp"
+            android:layout_height="24dp"
+            android:id="@+id/textClock"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/b2_quickcircle_analog_style03_day_bg"
+            android:textStyle="bold"
+            android:textColor="#fefefefe"
+            android:elegantTextHeight="false"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/date1"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="60dp"
+            android:textColor="#fefffefa"
+            android:textStyle="bold"
+            android:background="#00fffefa" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textbat"
+            android:layout_gravity="left|center_vertical"
+            android:textColor="#fefffefa"
+            android:textStyle="bold"
+            android:background="#00fffefa"
+            android:layout_marginLeft="50dp" />
+
+    </FrameLayout>
+
+</LinearLayout>

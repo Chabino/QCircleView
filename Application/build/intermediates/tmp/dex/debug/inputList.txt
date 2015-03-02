@@ -1,0 +1,4 @@
+F:\QCircleView\Application\build\intermediates\classes\debug
+F:\QCircleView\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-398aae3ace83c4dfd0b9d9570cbf26d0fe2b652d.jar
+F:\QCircleView\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-7f82ca721915aff91b998680149790ad4c37e3b5.jar
+F:\QCircleView\Application\build\intermediates\pre-dexed\debug\classes-41b7bea5c7a9a85f85e6effad2ae45134f6fea90.jar

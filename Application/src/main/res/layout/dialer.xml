@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        tools:context=".Home"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="309dp"
+        android:layout_height="307dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff5f6261">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:background="#ff5f6261">
+
+            <EditText
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:id="@+id/editText1"
+                android:hint="&quot;Enter Number&quot;"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#fefffefa"
+                android:background="#ff5f6261" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/supp"
+                android:background="@android:drawable/ic_input_delete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/one1"
+                android:text="@string/one"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/two1"
+                android:text="@string/two"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/three1"
+                android:text="@string/three"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/mul1"
+                android:text="@string/mul"
+                android:background="@android:drawable/picture_frame" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/four1"
+                android:text="@string/four"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/five1"
+                android:text="@string/five"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/six1"
+                android:text="@string/six"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/zero1"
+                android:text="0 +"
+                android:background="@android:drawable/picture_frame" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/seven1"
+                android:text="@string/seven"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/eight1"
+                android:text="@string/eight"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/nine1"
+                android:text="@string/nine"
+                android:background="@android:drawable/picture_frame"
+                android:layout_marginRight="10dp" />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieze1"
+                android:text="@string/dieze"
+                android:background="@android:drawable/picture_frame" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/call"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:drawable/stat_sys_phone_call_forward" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/retour8"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/ic_sysbar_back_dark_normal" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="309dp"
+    android:layout_height="307dp"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageView7"
+        android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/imageView2"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textColor="#ff040404" />
+
+    <ScrollView
+        android:layout_width="265dp"
+        android:layout_height="45dp"
+        android:id="@+id/scrollView">
+
+        <TextView
+            android:layout_width="265dp"
+            android:layout_height="84dp"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:enabled="false" />
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            android:id="@+id/pick"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/hangup" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:id="@+id/imageView3"
+        android:layout_gravity="right" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageButton"
+        android:background="@drawable/ic_sysbar_back_dark_normal" />
+
+</LinearLayout>

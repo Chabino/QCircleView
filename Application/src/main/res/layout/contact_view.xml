@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="309dp"
+        android:layout_height="307dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="307dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffffff">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="CONTACTS"
+                android:id="@+id/cont"
+                android:background="#ffff9395"
+                android:textStyle="bold"
+                android:layout_marginLeft="90dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="RECENTS"
+                android:id="@+id/rec"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:background="#ffffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="307dp"
+            android:layout_height="257dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffffff"
+            android:layout_marginTop="50dp">
+
+            <ListView
+                android:layout_width="250dp"
+                android:layout_height="205dp"
+                android:id="@+id/contact_list"
+                android:layout_marginLeft="25dp"
+                android:divider="#ffffffff"
+                android:dividerHeight="3dp"
+                android:clickable="false"
+                android:elevation="20dp"
+                android:drawSelectorOnTop="false"
+                android:headerDividersEnabled="true"
+                android:footerDividersEnabled="true"
+                android:background="#ffff9395" />
+
+            <ImageButton
+                android:layout_width="307dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/retour5"
+                android:background="@drawable/ic_sysbar_back_dark_normal" />
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/dialer"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/apps" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="  Click to\n open Dialer"
+            android:id="@+id/textView8"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="-40dp"
+            android:textColor="#fe010101" />
+    </FrameLayout>
+
+</LinearLayout>

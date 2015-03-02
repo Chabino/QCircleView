@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="307dp"
+        android:gravity="center">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:useDefaultMargins="true"
+            android:background="#ff6e6b6d">
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/flashlight"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:background="@drawable/flashlight" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageView4"
+                android:layout_row="0"
+                android:layout_column="0" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/sms"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:background="@drawable/sms" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/camera"
+                android:layout_row="1"
+                android:layout_column="3"
+                android:background="@drawable/camera" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/contacts"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:background="@drawable/contacts" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/stopwatchicon"
+                android:layout_row="2"
+                android:layout_column="2"
+                android:background="@drawable/clock"
+                android:cropToPadding="false"
+                android:clickable="true" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/calculator"
+                android:layout_row="2"
+                android:layout_column="3"
+                android:background="@drawable/calculator" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/weather_button"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:background="@drawable/accuweather" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/voice"
+                android:layout_row="3"
+                android:layout_column="2"
+                android:background="@drawable/voicesearch" />
+
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/toggles"
+                android:layout_row="3"
+                android:layout_column="3"
+                android:background="@drawable/settings" />
+        </GridLayout>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/retour1"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/ic_sysbar_back_dark_normal" />
+    </LinearLayout>
+</LinearLayout><!-- From: file:/F:/QCircleView/Application/src/main/res/layout/menu.xml -->

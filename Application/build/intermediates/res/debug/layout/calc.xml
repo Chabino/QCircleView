@@ -1,0 +1,172 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="309dp"
+    android:layout_height="307dp"
+    android:orientation="vertical"
+    tools:context=".Home"
+    android:layout_gravity="center_horizontal"
+    android:background="#ff545556">
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/display"
+        android:hint="@string/dispHint"
+        android:text="@string/disp"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/seven"
+            android:text="@string/seven"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/eight"
+            android:text="@string/eight"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/nine"
+            android:text="@string/nine"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/div"
+            android:text="@string/div"
+            android:background="@android:drawable/picture_frame" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="2dp">
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/four"
+            android:text="@string/four"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/five"
+            android:text="@string/five"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/six"
+            android:text="@string/six"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/mul"
+            android:text="@string/mul"
+            android:background="@android:drawable/picture_frame" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="2dp">
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/one"
+            android:text="@string/one"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/two"
+            android:text="@string/two"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/three"
+            android:text="@string/three"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/sub"
+            android:text="@string/sub"
+            android:background="@android:drawable/picture_frame" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/cancel"
+            android:text="@string/cancel"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/zero"
+            android:text="@string/zero"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/equal"
+            android:text="@string/equal"
+            android:background="@android:drawable/picture_frame" />
+
+        <Button
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/add"
+            android:text="@string/add"
+            android:background="@android:drawable/picture_frame" />
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/retour7"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ic_sysbar_back_dark_normal" />
+
+</LinearLayout><!-- From: file:/F:/QCircleView/Application/src/main/res/layout/calc.xml -->

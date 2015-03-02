@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fe000000"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This app needs root access and notification access to work"
+        android:id="@+id/textView11"
+        android:textColor="#feff0009"
+        android:layout_weight="0.03"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:id="@+id/imageView25"
+        android:background="#fefffefa" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/notification_access">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Activate Notification Listener\n Check QCircleView box"
+            android:id="@+id/textView9"
+            android:textColor="#fefffefa"
+            android:layout_marginLeft="15dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox1"
+            android:checked="false"
+            android:layout_marginLeft="20dp"
+            android:background="#fefffefa" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:id="@+id/imageView10"
+        android:background="#fefffefa"
+        android:layout_marginBottom="30dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:id="@+id/imageView12"
+        android:background="#fefffefa" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/root_access">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Activate Root Access\n Check imperatively :\n &quot;Remember my choice&quot;"
+            android:id="@+id/textView10"
+            android:textColor="#fefffefa"
+            android:layout_marginLeft="15dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox2"
+            android:layout_marginLeft="75dp"
+            android:checked="false"
+            android:background="#fffffefa" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:id="@+id/imageView24"
+        android:background="#fefffefa" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:layout_marginTop="40dp"
+        android:id="@+id/choose_clock">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Clock"
+            android:id="@+id/textView12"
+            android:textColor="#fefffefa"
+            android:textSize="50dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView13"
+            android:background="@drawable/alarm" />
+    </LinearLayout>
+
+</LinearLayout>

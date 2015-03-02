@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="309dp"
+    android:layout_height="307dp"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fe010101">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="265dp"
+            android:layout_height="40dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:textColor="#ff040404"
+            android:text="Incoming Call..."
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:textIsSelectable="true"
+            android:background="#a5fffefa"
+            android:linksClickable="false"
+            android:phoneNumber="false" />
+
+        <TextView
+            android:layout_width="265dp"
+            android:layout_height="40dp"
+            android:id="@+id/textView4"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:enabled="false"
+            android:textColor="#fe020202"
+            android:layout_marginTop="90dp"
+            android:textIsSelectable="false"
+            android:background="#a5fffefa" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/imageView9"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/arrow_down"
+            android:layout_marginTop="225dp" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/imageView8"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/arrow_up"
+            android:layout_marginTop="130dp" />
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            android:id="@+id/pick2"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:drawable/sym_call_incoming"
+            android:layout_marginTop="165dp" />
+    </FrameLayout>
+
+</LinearLayout>

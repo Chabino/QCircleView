@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="309dp"
+    android:layout_height="307dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/circle_background_vector">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="255dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="RESET"
+            android:id="@+id/reset"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:background="#80ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="StopWatch"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal"
+            android:background="#800a0a0a"
+            android:textColor="#ffffffff"
+            android:enabled="false"
+            android:textStyle="bold|italic" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:text="START"
+                android:id="@+id/start_button"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:background="#803fff1c"
+                android:textStyle="bold" />
+
+            <Button
+                android:text="STOP"
+                android:id="@+id/stop_button"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:background="#80ff310b"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:format="%s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:layout_gravity="center_horizontal"
+            android:background="#80030303"
+            android:textColor="#ffff0910"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/retour6"
+        android:background="@drawable/ic_sysbar_back_dark_normal" />
+
+</LinearLayout><!-- From: file:/F:/QCircleView/Application/src/main/res/layout/stopwatch.xml -->
