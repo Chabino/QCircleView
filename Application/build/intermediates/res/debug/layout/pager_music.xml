@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/item_title"
         android:layout_width="265dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textSize="17sp"
         android:gravity="center"
         android:textStyle="italic"
@@ -33,7 +33,7 @@
 
     <ScrollView
         android:layout_width="265dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:id="@+id/scrollView">
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_height="84dp"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:gravity="center"
             android:enabled="false"
@@ -90,7 +90,7 @@
 
     <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="55dp"
         android:id="@+id/imageButton"
         android:background="@drawable/ic_sysbar_back_dark_normal" />
 

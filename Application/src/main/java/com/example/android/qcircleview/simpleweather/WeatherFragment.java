@@ -177,6 +177,13 @@ public class WeatherFragment extends Fragment {
                     break;
                 case 7:
                     icon = getActivity().getString(R.string.weather_foggy);
+                    if (day) {
+                        Drawable ico = getResources().getDrawable(R.drawable.foggy_prom);
+                        WeatherActivity.weath.setBackground(ico);
+                    } else {
+                        Drawable ico = getResources().getDrawable(R.drawable.foggy_prom);
+                        WeatherActivity.weath.setBackground(ico);
+                    }
                     break;
                 case 8:
                     icon = getActivity().getString(R.string.weather_cloudy);

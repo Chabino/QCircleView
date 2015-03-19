@@ -1,22 +1,36 @@
 package com.example.android.qcircleview;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Created by Chabino on 01/03/2015.
  */
 public class ChooseClock extends Activity implements View.OnClickListener {
-    LinearLayout one, two, three, four, five, six, seven, eight, nine;
-    RadioButton rad1, rad2, rad3, rad4, rad5, rad6, rad7, rad8, rad9;
-
+    public static SharedPreferences.Editor editor;
+    LinearLayout one, two, three, four, five, six, seven, eight, nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyone,twentytwo;
+    RadioButton rad1, rad2, rad3, rad4, rad5, rad6, rad7, rad8, rad9,rad10, rad11, rad12, rad13, rad14, rad15, rad16, rad17, rad18,rad19,rad20,rad21,rad22;
+    public static SharedPreferences editval;
+    public static Drawable drawabler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chooseclock);
+        editval = this.getSharedPreferences("com.example.android.qcircleview.testval",MODE_PRIVATE);
+        SharedPreferences prefs = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+        Cover.choosen_clock = prefs.getInt("clock", 0);
         one = (LinearLayout) findViewById(R.id.clock1);
         two = (LinearLayout) findViewById(R.id.clock2);
         three = (LinearLayout) findViewById(R.id.clock3);
@@ -26,6 +40,19 @@ public class ChooseClock extends Activity implements View.OnClickListener {
         seven = (LinearLayout) findViewById(R.id.clock7);
         eight = (LinearLayout) findViewById(R.id.clock8);
         nine = (LinearLayout) findViewById(R.id.clock9);
+        ten = (LinearLayout) findViewById(R.id.clock10);
+        eleven = (LinearLayout) findViewById(R.id.clock11);
+        twelve = (LinearLayout) findViewById(R.id.clock12);
+        thirteen = (LinearLayout) findViewById(R.id.clock13);
+        fourteen = (LinearLayout) findViewById(R.id.clock14);
+        fifteen = (LinearLayout) findViewById(R.id.clock15);
+        sixteen = (LinearLayout) findViewById(R.id.clock16);
+        seventeen = (LinearLayout) findViewById(R.id.clock17);
+        eighteen = (LinearLayout) findViewById(R.id.clock18);
+        nineteen = (LinearLayout) findViewById(R.id.clock19);
+        twenty = (LinearLayout) findViewById(R.id.clock20);
+        twentyone = (LinearLayout) findViewById(R.id.clock21);
+        twentytwo = (LinearLayout) findViewById(R.id.clock22);
         rad1 = (RadioButton) findViewById(R.id.radio1);
         rad2 = (RadioButton) findViewById(R.id.radio2);
         rad3 = (RadioButton) findViewById(R.id.radio3);
@@ -35,6 +62,19 @@ public class ChooseClock extends Activity implements View.OnClickListener {
         rad7 = (RadioButton) findViewById(R.id.radio7);
         rad8 = (RadioButton) findViewById(R.id.radio8);
         rad9 = (RadioButton) findViewById(R.id.radio9);
+        rad10 = (RadioButton) findViewById(R.id.radio10);
+        rad11 = (RadioButton) findViewById(R.id.radio11);
+        rad12 = (RadioButton) findViewById(R.id.radio12);
+        rad13 = (RadioButton) findViewById(R.id.radio13);
+        rad14 = (RadioButton) findViewById(R.id.radio14);
+        rad15 = (RadioButton) findViewById(R.id.radio15);
+        rad16 = (RadioButton) findViewById(R.id.radio16);
+        rad17 = (RadioButton) findViewById(R.id.radio17);
+        rad18 = (RadioButton) findViewById(R.id.radio18);
+        rad19 = (RadioButton) findViewById(R.id.radio19);
+        rad20 = (RadioButton) findViewById(R.id.radio20);
+        rad21 = (RadioButton) findViewById(R.id.radio21);
+        rad22 = (RadioButton) findViewById(R.id.radio22);
         if (Cover.choosen_clock==R.layout.clock_page){rad1.setChecked(true);}
         else if(Cover.choosen_clock==R.layout.clock_page1){rad2.setChecked(true);}
         else if(Cover.choosen_clock==R.layout.clock_page2){rad3.setChecked(true);}
@@ -44,6 +84,19 @@ public class ChooseClock extends Activity implements View.OnClickListener {
         else if(Cover.choosen_clock==R.layout.clock_page6){rad7.setChecked(true);}
         else if(Cover.choosen_clock==R.layout.clock_page7){rad8.setChecked(true);}
         else if(Cover.choosen_clock==R.layout.clock_page8){rad9.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page9){rad10.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page10){rad11.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page11){rad12.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page12){rad13.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page13){rad14.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page14){rad15.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page15){rad16.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page16){rad17.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page17){rad18.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page18){rad19.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page19){rad20.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page20){rad21.setChecked(true);}
+        else if(Cover.choosen_clock==R.layout.clock_page21){rad22.setChecked(true);}
 
         try {
             one.setOnClickListener(this);
@@ -55,6 +108,19 @@ public class ChooseClock extends Activity implements View.OnClickListener {
             seven.setOnClickListener(this);
             eight.setOnClickListener(this);
             nine.setOnClickListener(this);
+            ten.setOnClickListener(this);
+            eleven.setOnClickListener(this);
+            twelve.setOnClickListener(this);
+            thirteen.setOnClickListener(this);
+            fourteen.setOnClickListener(this);
+            fifteen.setOnClickListener(this);
+            sixteen.setOnClickListener(this);
+            seventeen.setOnClickListener(this);
+            eighteen.setOnClickListener(this);
+            nineteen.setOnClickListener(this);
+            twenty.setOnClickListener(this);
+            twentyone.setOnClickListener(this);
+            twentytwo.setOnClickListener(this);
 
             rad1.setOnClickListener(this);
             rad2.setOnClickListener(this);
@@ -65,6 +131,19 @@ public class ChooseClock extends Activity implements View.OnClickListener {
             rad7.setOnClickListener(this);
             rad8.setOnClickListener(this);
             rad9.setOnClickListener(this);
+            rad10.setOnClickListener(this);
+            rad11.setOnClickListener(this);
+            rad12.setOnClickListener(this);
+            rad13.setOnClickListener(this);
+            rad14.setOnClickListener(this);
+            rad15.setOnClickListener(this);
+            rad16.setOnClickListener(this);
+            rad17.setOnClickListener(this);
+            rad18.setOnClickListener(this);
+            rad19.setOnClickListener(this);
+            rad20.setOnClickListener(this);
+            rad21.setOnClickListener(this);
+            rad22.setOnClickListener(this);
         } catch (Exception e) {
 
         }
@@ -83,7 +162,23 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval",MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock2:
@@ -96,7 +191,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page1;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock3:
@@ -109,7 +221,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page2;
+                SharedPreferences editval = this.getSharedPreferences("com.example.android.qcircleview.testval",MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock4:
@@ -122,7 +251,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page3;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval",MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock5:
@@ -135,7 +281,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page4;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval",MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock6:
@@ -148,7 +311,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page5;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock7:
@@ -161,7 +341,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(true);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page6;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock8:
@@ -174,7 +371,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(true);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page7;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.clock9:
@@ -187,7 +401,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(true);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page8;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio1:
@@ -200,7 +431,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio2:
@@ -213,7 +461,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page1;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio3:
@@ -226,7 +491,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page2;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio4:
@@ -239,7 +521,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page3;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio5:
@@ -252,7 +551,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page4;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio6:
@@ -265,7 +581,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page5;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio7:
@@ -278,7 +611,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(true);
                 rad8.setChecked(false);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page6;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio8:
@@ -291,7 +641,24 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(true);
                 rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page7;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
             case R.id.radio9:
@@ -304,9 +671,834 @@ public class ChooseClock extends Activity implements View.OnClickListener {
                 rad7.setChecked(false);
                 rad8.setChecked(false);
                 rad9.setChecked(true);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
                 Cover.choosen_clock = R.layout.clock_page8;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
 
                 break;
+            case R.id.clock10:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(true);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page9;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock11:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(true);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page10;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock12:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(true);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page11;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock13:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(true);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page12;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock14:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(true);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page13;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock15:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(true);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page14;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock16:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(true);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page15;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock17:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(true);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page16;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock18:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(true);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page17;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock19:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(true);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page18;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock20:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(true);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page19;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock21:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(true);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page20;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.clock22:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(true);
+                Cover.choosen_clock = R.layout.clock_page21;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"),0);
+
+                break;
+            case R.id.radio10:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(true);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page9;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio11:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(true);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page10;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio12:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(true);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page11;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio13:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(true);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page12;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio14:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(true);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page13;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio15:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(true);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page14;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio16:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(true);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page15;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio17:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(true);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page16;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio18:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(true);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page17;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio19:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(true);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page18;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio20:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(true);
+                rad21.setChecked(false);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page19;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio21:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(true);
+                rad22.setChecked(false);
+                Cover.choosen_clock = R.layout.clock_page20;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+
+                break;
+            case R.id.radio22:
+                rad1.setChecked(false);
+                rad2.setChecked(false);
+                rad3.setChecked(false);
+                rad4.setChecked(false);
+                rad5.setChecked(false);
+                rad6.setChecked(false);
+                rad7.setChecked(false);
+                rad8.setChecked(false);
+                rad9.setChecked(false);
+                rad10.setChecked(false);
+                rad11.setChecked(false);
+                rad12.setChecked(false);
+                rad13.setChecked(false);
+                rad14.setChecked(false);
+                rad15.setChecked(false);
+                rad16.setChecked(false);
+                rad17.setChecked(false);
+                rad18.setChecked(false);
+                rad19.setChecked(false);
+                rad20.setChecked(false);
+                rad21.setChecked(false);
+                rad22.setChecked(true);
+                Cover.choosen_clock = R.layout.clock_page21;
+                editval = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+                editor = editval.edit();
+                editor.putInt("clock", Cover.choosen_clock);
+                editor.apply();
+                Intent intent1 = new Intent();
+                intent1.setType("image/*");
+                intent1.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent1, "Select Picture"),0);
+
+                break;
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 0:
+                //data.getDataString();
+                if (resultCode == RESULT_OK) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                        drawabler = new BitmapDrawable(getResources(), bitmap);
+                    } catch (FileNotFoundException e) {
+                   // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                   // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    break;
+                }
         }
     }
 }

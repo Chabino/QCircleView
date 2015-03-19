@@ -6,12 +6,17 @@
     android:orientation="vertical"
     android:weightSum="1"
     android:layout_gravity="center_horizontal"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#fefffefa">
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#fe010101">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="bottom|center"
+        android:id="@+id/accept1">
 
         <TextView
             android:id="@+id/item_title"
@@ -23,11 +28,11 @@
             android:textColor="#ff040404"
             android:text="Incoming Call..."
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
             android:textIsSelectable="true"
-            android:background="#a5fffefa"
+            android:background="#3a030303"
             android:linksClickable="false"
-            android:phoneNumber="false" />
+            android:phoneNumber="false"
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:layout_width="265dp"
@@ -39,17 +44,8 @@
             android:gravity="center"
             android:enabled="false"
             android:textColor="#fe020202"
-            android:layout_marginTop="90dp"
             android:textIsSelectable="false"
-            android:background="#a5fffefa" />
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageView9"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/arrow_down"
-            android:layout_marginTop="225dp" />
+            android:background="#3b040404" />
 
         <ImageView
             android:layout_width="35dp"
@@ -57,15 +53,38 @@
             android:id="@+id/imageView8"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/arrow_up"
-            android:layout_marginTop="130dp" />
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_call1"
+        android:gravity="center">
 
         <ImageView
             android:layout_width="65dp"
-            android:layout_height="60dp"
+            android:layout_height="65dp"
             android:id="@+id/pick2"
             android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/sym_call_incoming"
-            android:layout_marginTop="165dp" />
-    </FrameLayout>
+            android:background="@drawable/telephone_black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:id="@+id/reject1">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/imageView9"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/arrow_down" />
+    </LinearLayout>
 
 </LinearLayout><!-- From: file:/F:/QCircleView/Application/src/main/res/layout/incoming_page.xml -->

@@ -19,12 +19,10 @@ package com.example.android.qcircleview;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
@@ -32,6 +30,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -43,6 +42,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.common.logger.Log;
 import com.example.android.common.view.SlidingTabLayout;
@@ -72,6 +72,8 @@ public class SlidingTabsBasicFragment extends Fragment {
      */
     public static ViewPager mViewPager;
     public static int page_pos;
+    public static ImageView rotate_anim,end_rotate_anim;
+    public static Animation rotate;
 
     /**
      * Inflates the {@link View} which will be displayed by this {@link Fragment}, from the app's
@@ -84,6 +86,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     public static Thread myThread;
     public static Runnable runnable;
     private TextView bat;
+    public static boolean stateone=false;
 
     public void onDestroy() {
         super.onDestroy();
@@ -140,6 +143,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         // it's PagerAdapter set.
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
+        stateone=true;
         // END_INCLUDE (setup_slidingtablayout)
     }
 
@@ -168,7 +172,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                     rotateAnimation.setFillAfter(true);
 
                     img.startAnimation(rotateAnimation);
-                    IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+                   /* IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
                     Intent batteryStatus = getActivity().registerReceiver(null, ifilter);
                     int level = 0;
                     if (batteryStatus != null) {
@@ -182,7 +186,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                     float batteryPct = level / (float)scale;
                     float battstate = batteryPct* 100;
                     bat=(TextView) getActivity().findViewById(R.id.textbat);
-                    bat.setText(String.valueOf(battstate)+"%");
+                    bat.setText(String.valueOf(battstate)+"%");*/
                 } catch (Exception e) {
 
                 }
@@ -193,15 +197,110 @@ public class SlidingTabsBasicFragment extends Fragment {
     class CountDownRunner implements Runnable {
         // @Override
         public void run() {
+            int anim =0;
             while (!Thread.currentThread().isInterrupted()) {
                 try {
+                    anim++;
+                    if (anim==5){
+                        end_rotate_anim.setVisibility(View.INVISIBLE);}
+                    if (anim == 2){
+                        end_rotate_anim = (ImageView) viewtest.findViewById(R.id.animate_plain);
+                        rotate_anim = (ImageView) viewtest.findViewById(R.id.animate1);
+                    rotate = new RotateAnimation(0,360,
+                            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                            0.5f);
+                    rotate.setInterpolator(new LinearInterpolator());
+                    rotate.setDuration(500);
+                    rotate.setRepeatCount(4);
+                        final int finalAnim = anim;
+                        rotate.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            rotate_anim.setVisibility(View.VISIBLE);
+                            end_rotate_anim.setVisibility(View.INVISIBLE);
+                        }
 
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            android.util.Log.i("test", "Animation ended");
+                            //if (finalAnim ==4) {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                                end_rotate_anim.setVisibility(View.VISIBLE);
+                            rotate_anim.setVisibility(View.INVISIBLE);
+                            if (CallHelper.callReceived){
+                                SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
+                                try {
+                                    Thread.sleep(1500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    Process su = Runtime.getRuntime().exec("su");
+                                    DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                                    outputStream.writeBytes("input keyevent 26\n");
+                                    outputStream.flush();
+
+                                    outputStream.writeBytes("exit\n");
+                                    outputStream.flush();
+                                    su.waitFor();
+                                } catch (IOException t) {
+                                    t.printStackTrace();
+                                } catch (InterruptedException t) {
+                                    t.printStackTrace();
+                                }
+                            }
+                            /*if (Cover.threadon){
+                                    try {
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        end_rotate_anim.setVisibility(View.VISIBLE);
+                                        try {
+                                            Thread.sleep(600);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Process su = Runtime.getRuntime().exec("su");
+                                        DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                                        outputStream.writeBytes("input keyevent 26\n");
+                                        outputStream.flush();
+
+                                        outputStream.writeBytes("exit\n");
+                                        outputStream.flush();
+                                        su.waitFor();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Cover.threadon=false;
+                                }*/
+                            }
+
+                        //}
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    rotate_anim.startAnimation(rotate);
+                    }
                     doRotate();
                     Thread.sleep(1000);
+                    rotate_anim.clearAnimation();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } catch (Exception e) {
-                    Log.e("log_tag", "Error is " + e.toString());
+                    //Log.e("log_tag", "Error is " + e.toString());
                 }
             }
         }
@@ -279,24 +378,31 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                try {
+                    if (e1.getRawY() > e2.getRawY() && e1.getRawX()< e2.getRawX()+60 && e1.getRawX()>e2.getRawX()-60){
+                        Log.i("test", "FLING!!!!!!!!!!!");
+                    if (SlidingTabsBasicFragment.myThread != null) {
+                        myThread.interrupt();
+                        try {
+                            myThread.join();
+                        } catch (InterruptedException ie) {
+                            ie.printStackTrace();
+                        }
+                        myThread = null;
+                    }
+                    Intent startIntent = new Intent(getActivity(), Menu.class);
+                    startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(startIntent);
+                }
+                }catch (NullPointerException e){
+
+                }
                 return false;
 
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                if (SlidingTabsBasicFragment.myThread != null) {
-                    myThread.interrupt();
-                    try {
-                        myThread.join();
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                    }
-                    myThread = null;
-                }
-                Intent startIntent = new Intent(getActivity(), Menu.class);
-                startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(startIntent);
                 return false;
             }
 
@@ -345,21 +451,40 @@ public class SlidingTabsBasicFragment extends Fragment {
                 // Inflate a new layout from our resources
                 viewtest = getActivity().getLayoutInflater().inflate(Cover.choosen_clock,
                         container, false);
+                if (Cover.choosen_clock==R.layout.clock_page21){
                 String timeStamp = new SimpleDateFormat("EEEE dd MMMM yyyy").format(new Date());
                 TextView today = (TextView) viewtest.findViewById(R.id.date1);
                 today.setText(timeStamp);
+                    if (ChooseClock.drawabler!=null) {
+                        if (ChooseClock.drawabler.getMinimumHeight()<4096 && ChooseClock.drawabler.getMinimumWidth()<4096) {
+                            viewtest.setBackground(ChooseClock.drawabler);
+                        }
+                        else{
+                            Toast toast = Toast.makeText(getActivity(), "Bitmap too large to be \n uploaded into a texture \n (4160x3120, max=4096x4096)", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.TOP, 0, 250);
+                            toast.show();
+                        }
+                    }
+                }
+                /*String timeStamp = new SimpleDateFormat("EEEE dd MMMM yyyy").format(new Date());
+                TextView today = (TextView) viewtest.findViewById(R.id.date1);
+                today.setText(timeStamp);*/
                 container.addView(viewtest);
                 Log.i(LOG_TAG, "instantiateItem() [position: " + position + "]");
                 // Return the View
                 return viewtest;
 
             } else {
-                if (NotificationListener.media > 0 && position == NotificationListener.media) {
+                if ((NotificationListener.media > 0 && position == NotificationListener.media) || MainActivity.h[position - 1][1].equals("com.spotify.music")) {
                     // Inflate a new layout from our resources
                     View view = getActivity().getLayoutInflater().inflate(R.layout.pager_music,
                             container, false);
                     Drawable d = new BitmapDrawable(getResources(), MainActivity.g[position - 1]);
                     view.setBackground(d);
+                    if(MainActivity.h[position - 1][1].equals("com.spotify.music")) {
+                        Drawable ico = getResources().getDrawable(R.drawable.audio_pic);
+                        view.setBackground(ico);
+                    }
                     ImageView im2 = (ImageView) view.findViewById(R.id.imageView);
                     PackageManager pm = getActivity().getPackageManager();
                     String pckg = MainActivity.h[position - 1][1];

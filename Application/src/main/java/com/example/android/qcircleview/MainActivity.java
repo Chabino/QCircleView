@@ -19,6 +19,7 @@ package com.example.android.qcircleview;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -47,7 +48,6 @@ public class MainActivity extends SampleActivityBase {
     public static Bitmap bm;
     public static Context mainactivity2;
 
-    private Intent intent_call;
 
     @Override
     protected void onResume() {
@@ -66,17 +66,21 @@ public class MainActivity extends SampleActivityBase {
         super.onCreate(savedInstanceState);
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         mainactivity1 = this;
         mainactivity2 = mainactivity1.getApplicationContext();
         isVisible = true;
+        SharedPreferences prefs = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+        Cover.choosen_clock = prefs.getInt("clock", 0);
+        //Settings.System.putLong(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
         setContentView(R.layout.activity_main);
         /*nReceiver = new NotificationReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.example.android.slidingtabsbasic1");
-        registerReceiver(nReceiver,filter);*/
+        registerReceiver(nReceiver,filter);
         startService(new Intent(this, Cover.class));
-        startService(new Intent(this, NotificationListener.class));
+        startService(new Intent(this, NotificationListener.class));*/
         while (NotificationListener.listener = false) {
             Log.i("Listener", "Waiting NotificationListener");
         }
@@ -89,12 +93,14 @@ public class MainActivity extends SampleActivityBase {
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
-        intent_call = new Intent(this, CallDetectService.class);
-        // start detect service
-        startService(intent_call);
         //setContentView(R.layout.activity_main);
         Log.i(TAG, "Activité lancée.");
-
+        if (CallHelper.ring){
+            Intent startIntent = new Intent(MainActivity.mainactivity2, IncomingCall.class);
+            startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            MainActivity.mainactivity2.startActivity(startIntent);
+            CallHelper.phone_state = true;
+        }
     }
 
     @Override
@@ -148,9 +154,9 @@ public class MainActivity extends SampleActivityBase {
             }
             SlidingTabsBasicFragment.myThread = null;
         }
-        //unregisterReceiver(nReceiver);
-        stopService(intent_call);
-        //Settings.System.putLong(getApplicationContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, Cover.time_default);
+
+        SlidingTabsBasicFragment.stateone=false;
+        //Settings.System.putLong(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, Configuration.time_default);
         super.onDestroy();
     }
 

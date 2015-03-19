@@ -1,22 +1,22 @@
 package com.example.android.qcircleview;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.FileObserver;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
 
-import java.io.DataOutputStream;
+import com.example.android.qcircleview.simpleweather.WeatherActivity;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -31,8 +31,9 @@ public class Cover extends Service {
     private static Notification notification;
     private int obs;
     public static FileObserver observer;
-    public static long time_default;
+    //public static long time_default;
     public static int choosen_clock;
+    public static boolean threadon=false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -101,26 +102,51 @@ public class Cover extends Service {
                     if (event == 1073741856) {
                         am++;
                         Log.i(TAG, "am:" + am);
-                        if (pm.isInteractive() && am == 2) {
-                            try {
-                                Process su = Runtime.getRuntime().exec("su");
-                                DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-                                outputStream.writeBytes("input keyevent 26\n");
-                                outputStream.flush();
-
-                                outputStream.writeBytes("exit\n");
-                                outputStream.flush();
-                                su.waitFor();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                        if (am == 2) {
+                            if (!MainActivity.isVisible) {
+                                threadon = true;
+                            /*PackageManager pm = getApplicationContext().getPackageManager();
+                            ComponentName componentName = new ComponentName(getApplicationContext(),
+                                    NotificationListener.class);
+                            pm.setComponentEnabledSetting(componentName,
+                                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                                    PackageManager.DONT_KILL_APP);
+                            pm.setComponentEnabledSetting(componentName,
+                                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                    PackageManager.DONT_KILL_APP);*/
+                                KeyguardManager keyguardManager = (KeyguardManager)getSystemService(Activity.KEYGUARD_SERVICE);
+                                KeyguardManager.KeyguardLock lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
+                                lock.reenableKeyguard();
+                                Intent startIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(startIntent);
+                                int count1 = 0;
+                                while (!SlidingTabsBasicFragment.stateone) {
+                                    count1++;
+                                }
+                                try {
+                                    Thread.sleep(500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                if (SlidingTabsBasicFragment.myThread != null) {
+                                    SlidingTabsBasicFragment.myThread.interrupt();
+                                    try {
+                                        SlidingTabsBasicFragment.myThread.join();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    SlidingTabsBasicFragment.myThread = null;
+                                }
+                                Log.i("test", "Thread lancé");
+                                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                                SlidingTabsBasicFragment.myThread.start();
+                                am = 2;
                             }
-                        } else if (pm.isInteractive() && am == 6) {
+                        } else if (am == 4) {
                             if (MainActivity.isVisible) {
                                 MainActivity.mainactivity1.finish();
-                                PackageManager pm = getApplicationContext().getPackageManager();
+                                /*PackageManager pm = getApplicationContext().getPackageManager();
                                 ComponentName componentName = new ComponentName(getApplicationContext(),
                                         NotificationListener.class);
                                 pm.setComponentEnabledSetting(componentName,
@@ -128,9 +154,23 @@ public class Cover extends Service {
                                         PackageManager.DONT_KILL_APP);
                                 pm.setComponentEnabledSetting(componentName,
                                         PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                                        PackageManager.DONT_KILL_APP);
+                                        PackageManager.DONT_KILL_APP);*/
                                 //Settings.System.putLong(getApplicationContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, time_default);
+                                am=0;
+                            }
+                        }else if (am>4){
+                            try {
+                                Scanner sc = new Scanner(new File("/sys/devices/virtual/switch/smartcover/state"));
+                                status = Integer.parseInt(sc.nextLine());
+                                sc.close();
+
+                            } catch (FileNotFoundException e) {
+                                Log.e(getString(R.string.app_name), "Hall effect sensor device file not found!");
+                            }
+                            if (status == 0) {
                                 am = 0;
+                            } else if (status == 1) {
+                                am = 2;
                             }
                         }
                     }
@@ -149,10 +189,43 @@ public class Cover extends Service {
                 if (Menu.menustate) {
                     Menu.menu1.finish();
                 }
+                if (FlashLightActivity.flashlightstate) {
+                    FlashLightActivity.flashlight1.finish();
+                }
+                if (Sms.sms) {
+                    Sms.sms1.finish();
+                }
+                if (SmsDetails.smsdetails) {
+                    SmsDetails.smsdetails1.finish();
+                }
+                if (Camera.camera) {
+                    Camera.camera1.finish();
+                }
+                if (StopWatch.chrono) {
+                    StopWatch.chrono1.finish();
+                }
+                if (Calc.calc) {
+                    Calc.calc1.finish();
+                }
+                if (Contact.contact) {
+                    Contact.contact1.finish();
+                }
+                if (DialerAppActivity.dial) {
+                    DialerAppActivity.dial1.finish();
+                }
+                if (VoiceRecorder.recv) {
+                    VoiceRecorder.recv1.finish();
+                }
+                if (StatusBarToggles.tog) {
+                    StatusBarToggles.tog1.finish();
+                }
+                if (WeatherActivity.weather) {
+                    WeatherActivity.weather1.finish();
+                }
                 if (SlidingTabsBasicFragment.page_pos != 0) {
                     SlidingTabsBasicFragment.mViewPager.setCurrentItem(0);
                 }
-                if (!MainActivity.isVisible) {
+                /*if (!MainActivity.isVisible) {
                     PackageManager pm = getApplicationContext().getPackageManager();
                     ComponentName componentName = new ComponentName(getApplicationContext(),
                             NotificationListener.class);
@@ -166,7 +239,7 @@ public class Cover extends Service {
                     startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //Settings.System.putLong(getApplicationContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 15000);
                     context.startActivity(startIntent);
-                }
+                }*/
                 if (SlidingTabsBasicFragment.myThread != null) {
                     SlidingTabsBasicFragment.myThread.interrupt();
                     try {
@@ -176,9 +249,22 @@ public class Cover extends Service {
                     }
                     SlidingTabsBasicFragment.myThread = null;
                 }
+                try {
+                    Scanner sc = new Scanner(new File("/sys/devices/virtual/switch/smartcover/state"));
+                    status = Integer.parseInt(sc.nextLine());
+                    sc.close();
+
+                } catch (FileNotFoundException e) {
+                    Log.e(context.getString(R.string.app_name), "Hall effect sensor device file not found!");
+                }
+                if (status == 0) {
+                    am = 0;
+                } else if (status == 1) {
+                    am = 2;
+                }
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
 
-                Log.i(TAG, "valeur" + time_default);
+                //Log.i(TAG, "valeur" + time_default);
                 //Settings.System.putLong(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, time);
                 try {
                     Scanner sc = new Scanner(new File("/sys/devices/virtual/switch/smartcover/state"));
@@ -193,7 +279,7 @@ public class Cover extends Service {
                     if (MainActivity.isVisible) {
                         MainActivity.mainactivity1.finish();
                         //Settings.System.putLong(getApplicationContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, time_default);
-                        PackageManager pm = getApplicationContext().getPackageManager();
+                        /*PackageManager pm = getApplicationContext().getPackageManager();
                         ComponentName componentName = new ComponentName(getApplicationContext(),
                                 NotificationListener.class);
                         pm.setComponentEnabledSetting(componentName,
@@ -203,16 +289,36 @@ public class Cover extends Service {
                         pm.setComponentEnabledSetting(componentName,
                                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                                 PackageManager.DONT_KILL_APP);
-                    /*Thread myThread1 = new Thread(myRunnable2);
+                    Thread myThread1 = new Thread(myRunnable2);
                     myThread1.start();*/
                     }
                 } else if (status == 1) {
-                    am = 4;
+                    am = 2;
+                    /*Intent startIntent = new Intent(getApplication(), Animate.class);
+                    startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(startIntent);*/
                     if (CallHelper.phone_state) {
                         SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
                     }
+                    if (SlidingTabsBasicFragment.myThread != null) {
+                        SlidingTabsBasicFragment.myThread.interrupt();
+                        try {
+                            SlidingTabsBasicFragment.myThread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        SlidingTabsBasicFragment.myThread = null;
+                    }
                     SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
                     SlidingTabsBasicFragment.myThread.start();
+                    /*SlidingTabsBasicFragment.myThread2 = new Thread(SlidingTabsBasicFragment.runnable2);
+                    SlidingTabsBasicFragment.myThread2.start();*/
+                    /*try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }*/
+                    //Animate.Animate1.finish();
                     /*Thread myThread = new Thread(myRunnable);
                     myThread.start();*/
                 }

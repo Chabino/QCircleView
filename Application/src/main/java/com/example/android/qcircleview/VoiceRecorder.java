@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,10 +31,14 @@ public class VoiceRecorder extends Activity {
     private TextView text;
     public static boolean recv;
     public static Activity recv1;
+    static Thread t;
+    static  ProgressBar progression;
+    static boolean stop1;
 
     @Override
     protected void onDestroy() {
         recv = false;
+        t.interrupt();
         super.onDestroy();
     }
 
@@ -54,6 +59,15 @@ public class VoiceRecorder extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+                if (SlidingTabsBasicFragment.myThread != null) {
+                    SlidingTabsBasicFragment.myThread.interrupt();
+                    try {
+                        SlidingTabsBasicFragment.myThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SlidingTabsBasicFragment.myThread = null;
+                }
                 SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
                 SlidingTabsBasicFragment.myThread.start();
             }
@@ -110,6 +124,25 @@ public class VoiceRecorder extends Activity {
                 stopPlay(v);
             }
         });
+        progression = (ProgressBar) findViewById(R.id.progress_bar);
+        progression.setMinimumHeight(20);
+        progression.setMinimumWidth(100);
+        t = new Thread(){
+            @Override
+            public void run() {
+
+                while (myPlayer!=null) {
+                    if(!stop1){
+                        try {
+                            progression.setProgress(myPlayer.getCurrentPosition());
+                        }catch (IllegalStateException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                stop1=true;
+            }
+        };
     }
 
     public void start(View view) {
@@ -159,11 +192,14 @@ public class VoiceRecorder extends Activity {
     }
 
     public void play(View view) {
+        stop1=false;
         try {
             myPlayer = new MediaPlayer();
             myPlayer.setDataSource(outputFile);
             myPlayer.prepare();
             myPlayer.start();
+            int max_dur = myPlayer.getDuration();
+            progression.setMax(max_dur);
 
             playBtn.setEnabled(false);
             stopPlayBtn.setEnabled(true);
@@ -173,6 +209,7 @@ public class VoiceRecorder extends Activity {
                     Toast.LENGTH_SHORT);
             to3.setGravity(Gravity.TOP, 0, 250);
             to3.show();
+            t.start();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -180,11 +217,13 @@ public class VoiceRecorder extends Activity {
     }
 
     public void stopPlay(View view) {
+        stop1 = true;
         try {
             if (myPlayer != null) {
+                t.interrupt();
                 myPlayer.stop();
                 myPlayer.release();
-                myPlayer = null;
+                //myPlayer = null;
                 playBtn.setEnabled(true);
                 stopPlayBtn.setEnabled(false);
                 text.setText("Recording Point: Stop playing");

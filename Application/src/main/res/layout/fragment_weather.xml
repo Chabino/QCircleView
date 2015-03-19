@@ -15,8 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="10dp" />
+        android:textSize="15sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/updated_field"

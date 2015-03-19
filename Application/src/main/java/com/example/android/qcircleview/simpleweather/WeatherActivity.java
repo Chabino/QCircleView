@@ -59,6 +59,15 @@ public class WeatherActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                if (SlidingTabsBasicFragment.myThread != null) {
+                    SlidingTabsBasicFragment.myThread.interrupt();
+                    try {
+                        SlidingTabsBasicFragment.myThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SlidingTabsBasicFragment.myThread = null;
+                }
                 SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
                 SlidingTabsBasicFragment.myThread.start();
             }
@@ -132,7 +141,7 @@ public class WeatherActivity extends FragmentActivity {
 
 
             if (!provider.contains("gps")) { //if gps is disabled
-                Toast toast = Toast.makeText(mycontext, "Open the Cover for activate Location", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(mycontext, "Open the Cover to activate Location", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP, 0, 250);
                 toast.show();
                 Log.i("gps", "gps : disabled");

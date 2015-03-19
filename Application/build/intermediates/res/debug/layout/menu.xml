@@ -16,7 +16,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center_horizontal"
             android:useDefaultMargins="true"
-            android:background="#ff6e6b6d">
+            android:background="#fffff8fd">
 
             <ImageButton
                 android:layout_width="65dp"

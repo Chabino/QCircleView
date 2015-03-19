@@ -20,8 +20,8 @@ public class CallHelper {
     public static boolean phone_state = false;
     public static String contactName1;
     public static String contactaddress;
-    static boolean callReceived = false;
-    static boolean ring = false;
+    public static boolean callReceived = false;
+    public static boolean ring = false;
 
     /**
      * Listener to detect incoming calls.
@@ -38,6 +38,7 @@ public class CallHelper {
                 toast2.setGravity(Gravity.TOP, 0, 250);
                 toast2.show();*/
                     callReceived = true;
+                    ring=false;
                     break;
                 case TelephonyManager.CALL_STATE_IDLE:
                 /*Toast toast2 = Toast.makeText(ctx,
@@ -46,9 +47,10 @@ public class CallHelper {
                 toast2.setGravity(Gravity.TOP, 0, 250);
                 toast2.show();*/
                     if (ring && !callReceived) {
-                        Intent in5 = new Intent("android.intent.findcontact");
+                        Intent in5 = new Intent("android.intent.incoming_close");
                         MainActivity.mainactivity2.sendBroadcast(in5);
                     }
+                    callReceived=false;
                     phone_state = false;
                     ring = false;
                     break;
@@ -59,23 +61,31 @@ public class CallHelper {
                         Toast.LENGTH_LONG);
                 toast3.setGravity(Gravity.TOP, 0, 250);
                 toast3.show();*/
-                    contactaddress = incomingNumber;
-                    Uri Nameuri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(incomingNumber));
-                    Cursor cs = MainActivity.mainactivity2.getContentResolver().query(Nameuri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.Contacts._ID}, ContactsContract.PhoneLookup.NUMBER + "='" + incomingNumber + "'", null, null);
-                    if (cs.getCount() > 0) {
-                        cs.moveToFirst();
-                        contactName1 = cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-                    }
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Intent startIntent = new Intent(MainActivity.mainactivity2, IncomingCall.class);
-                    startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MainActivity.mainactivity2.startActivity(startIntent);
-                    phone_state = true;
                     ring = true;
+                    contactName1=incomingNumber;
+                    if (MainActivity.isVisible) {
+                        contactaddress = incomingNumber;
+                        Uri Nameuri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(incomingNumber));
+                        Cursor cs = MainActivity.mainactivity2.getContentResolver().query(Nameuri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.Contacts._ID}, ContactsContract.PhoneLookup.NUMBER + "='" + incomingNumber + "'", null, null);
+                        if (cs.getCount() > 0) {
+                            cs.moveToFirst();
+                            if (cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME))!=null)
+                            {
+                                contactName1 = cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                            }
+                        }else{
+                            contactName1=incomingNumber;
+                        }
+                        try {
+                            Thread.sleep(900);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Intent startIntent = new Intent(MainActivity.mainactivity2, IncomingCall.class);
+                        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        MainActivity.mainactivity2.startActivity(startIntent);
+                        phone_state = true;
+                    }
                     break;
             }
         }

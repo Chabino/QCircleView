@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="304dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <AnalogClock
+            android:layout_width="wrap_content"
+            android:layout_height="304dp"
+            android:id="@+id/analogClock"
+            android:layout_gravity="center_horizontal"
+            android:dial="@drawable/b2_quickcircle_analog_style03_bg3"
+            android:hand_hour="@drawable/b2_quickcircle_analog_style03_hour3"
+            android:hand_minute="@drawable/b2_quickcircle_analog_style03_minute3" />
+
+        <ImageView
+            android:src="@drawable/b2_quickcircle_analog_style03_second3"
+            android:id="@+id/imgsecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal" />
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="330dp"
+            android:layout_height="320dp"
+            android:id="@+id/frameLayout4" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/animate1"
+                android:background="@drawable/anim_test"
+                android:layout_marginTop="-10dp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/animate_plain"
+                android:background="@drawable/anim_test_plain"
+                android:layout_marginTop="-10dp"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout><!-- From: file:/F:/QCircleView/Application/src/main/res/layout/clock_page11.xml -->

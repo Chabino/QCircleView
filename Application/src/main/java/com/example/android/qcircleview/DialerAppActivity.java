@@ -132,6 +132,15 @@ public class DialerAppActivity extends Activity implements View.OnClickListener 
                             Intent startIntent = new Intent(getApplication(), MainActivity.class);
                             startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(startIntent);
+                            if (SlidingTabsBasicFragment.myThread != null) {
+                                SlidingTabsBasicFragment.myThread.interrupt();
+                                try {
+                                    SlidingTabsBasicFragment.myThread.join();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                SlidingTabsBasicFragment.myThread = null;
+                            }
                             SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
                             SlidingTabsBasicFragment.myThread.start();
                             CallHelper.phone_state = true;

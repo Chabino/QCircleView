@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/item_title"
         android:layout_width="265dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:textSize="17sp"
         android:gravity="center"
         android:textStyle="italic"
@@ -61,7 +61,7 @@
 
     <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="55dp"
         android:id="@+id/imageButton"
         android:background="@drawable/ic_sysbar_back_dark_normal" />
 

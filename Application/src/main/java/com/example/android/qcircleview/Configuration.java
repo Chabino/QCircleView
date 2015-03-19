@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 public class Configuration extends Activity {
     CheckBox box1;
     CheckBox box2;
+    public static long time_default;
 
     @Override
     protected void onResume() {
@@ -30,8 +32,18 @@ public class Configuration extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configuration);
+        startService(new Intent(this, CallDetectService.class));
+        SharedPreferences prefs = this.getSharedPreferences("com.example.android.qcircleview.testval", MODE_PRIVATE);
+        int box1val = prefs.getInt("box1", 0);
+        int box2val = prefs.getInt("box2", 0);
+        //time_default = android.provider.Settings.System.getLong(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT,-1);
         box1 = (CheckBox) findViewById(R.id.checkBox1);
         box2 = (CheckBox) findViewById(R.id.checkBox2);
+        ChooseClock.editval = this.getSharedPreferences("com.example.android.qcircleview.testval",MODE_PRIVATE);
+        if (box1val==1){box1.setChecked(true);}
+        else{box1.setChecked(false);}
+        if (box2val==1){box2.setChecked(true);}
+        else{box2.setChecked(false);}
         if (isNLServiceRunning()) {
             box1.setChecked(true);
             ReceiverCall.service_on = true;
@@ -40,7 +52,7 @@ public class Configuration extends Activity {
             ReceiverCall.service_on = false;
             box1.setChecked(false);
         }
-        if (ExecuteAsRootBase.su_on) {
+        if (ExecuteAsRootBase.su_on||ReceiverCall.checkok) {
             box2.setChecked(true);
         } else {
             box2.setChecked(false);
@@ -63,10 +75,16 @@ public class Configuration extends Activity {
             public void onClick(View v) {
                 if (ExecuteAsRootBase.canRunRootCommands()) {
                     box2.setChecked(true);
+                    ChooseClock.editor = ChooseClock.editval.edit();
+                    ChooseClock.editor.putInt("box1", 1);
+                    ChooseClock.editor.apply();
                     ReceiverCall.service_on2 = true;
                     startService(new Intent(Configuration.this, Cover.class));
                 } else {
                     ReceiverCall.service_on2 = false;
+                    ChooseClock.editor = ChooseClock.editval.edit();
+                    ChooseClock.editor.putInt("box1", 0);
+                    ChooseClock.editor.apply();
                     box2.setChecked(false);
                 }
             }
@@ -77,10 +95,16 @@ public class Configuration extends Activity {
             public void onClick(View v) {
                 if (ExecuteAsRootBase.canRunRootCommands()) {
                     box2.setChecked(true);
+                    ChooseClock.editor = ChooseClock.editval.edit();
+                    ChooseClock.editor.putInt("box2", 1);
+                    ChooseClock.editor.apply();
                     ReceiverCall.service_on2 = true;
                     startService(new Intent(Configuration.this, Cover.class));
                 } else {
                     ReceiverCall.service_on2 = false;
+                    ChooseClock.editor = ChooseClock.editval.edit();
+                    ChooseClock.editor.putInt("box2", 0);
+                    ChooseClock.editor.apply();
                     box2.setChecked(false);
                 }
             }

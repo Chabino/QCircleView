@@ -67,6 +67,15 @@ public class Camera extends Activity {
                 Intent startIntent = new Intent(getApplication(), MainActivity.class);
                 startActivity(startIntent);
                 finish();
+                if (SlidingTabsBasicFragment.myThread != null) {
+                    SlidingTabsBasicFragment.myThread.interrupt();
+                    try {
+                        SlidingTabsBasicFragment.myThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SlidingTabsBasicFragment.myThread = null;
+                }
                 SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
                 SlidingTabsBasicFragment.myThread.start();
             }

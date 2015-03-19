@@ -122,7 +122,7 @@ public class NotificationListener extends NotificationListenerService {
             media = 0;
             for (StatusBarNotification sbn2 : NotificationListener.this.getActiveNotifications()) {
                 if (sbn2.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT) == null) {
-                    MainActivity.h[f][0] = "no text";
+                    MainActivity.h[f][0] = sbn2.getNotification().tickerText.toString();
                 } else {
                     MainActivity.h[f][0] = sbn2.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString();
                 }

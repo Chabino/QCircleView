@@ -12,7 +12,7 @@
         android:layout_height="307dp"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:background="#ff5f6261">
+        android:background="#fff7fffc">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -28,8 +28,8 @@
                 android:id="@+id/editText1"
                 android:hint="&quot;Enter Number&quot;"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#fefffefa"
-                android:background="#ff5f6261" />
+                android:textColor="#fe44ff2f"
+                android:background="#fff7fffc" />
 
             <ImageButton
                 android:layout_width="40dp"
@@ -167,7 +167,7 @@
             android:layout_height="50dp"
             android:id="@+id/call"
             android:layout_gravity="center_horizontal"
-            android:background="@android:drawable/stat_sys_phone_call_forward" />
+            android:background="@drawable/telephone_black" />
 
         <ImageButton
             android:layout_width="fill_parent"

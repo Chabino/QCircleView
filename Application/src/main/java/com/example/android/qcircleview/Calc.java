@@ -46,6 +46,15 @@ public class Calc extends Activity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 finish();
+                if (SlidingTabsBasicFragment.myThread != null) {
+                    SlidingTabsBasicFragment.myThread.interrupt();
+                    try {
+                        SlidingTabsBasicFragment.myThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SlidingTabsBasicFragment.myThread = null;
+                }
                 SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
                 SlidingTabsBasicFragment.myThread.start();
             }
