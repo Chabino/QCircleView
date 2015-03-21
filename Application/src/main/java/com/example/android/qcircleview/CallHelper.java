@@ -63,19 +63,19 @@ public class CallHelper {
                 toast3.show();*/
                     ring = true;
                     contactName1=incomingNumber;
-                    if (MainActivity.isVisible) {
-                        contactaddress = incomingNumber;
-                        Uri Nameuri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(incomingNumber));
-                        Cursor cs = MainActivity.mainactivity2.getContentResolver().query(Nameuri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.Contacts._ID}, ContactsContract.PhoneLookup.NUMBER + "='" + incomingNumber + "'", null, null);
-                        if (cs.getCount() > 0) {
-                            cs.moveToFirst();
-                            if (cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME))!=null)
-                            {
-                                contactName1 = cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-                            }
-                        }else{
-                            contactName1=incomingNumber;
+                    contactaddress = incomingNumber;
+                    contactName1=incomingNumber;
+                    Uri Nameuri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(incomingNumber));
+                    Cursor cs = MainActivity.mainactivity2.getContentResolver().query(Nameuri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.Contacts._ID}, ContactsContract.PhoneLookup.NUMBER + "='" + incomingNumber + "'", null, null);
+                    if (cs.getCount() > 0) {
+                        cs.moveToFirst();
+                        if (cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME))!=null)
+                        {
+                            contactName1 = cs.getString(cs.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
                         }
+                    }
+                    if (MainActivity.isVisible) {
+
                         try {
                             Thread.sleep(900);
                         } catch (InterruptedException e) {

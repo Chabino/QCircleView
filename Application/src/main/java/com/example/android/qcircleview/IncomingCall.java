@@ -315,17 +315,10 @@ public class IncomingCall extends Activity {
             Intent startIntent = new Intent(IncomingCall.this, MainActivity.class);
             startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(startIntent);
-            if (SlidingTabsBasicFragment.myThread != null) {
-                SlidingTabsBasicFragment.myThread.interrupt();
-                try {
-                    SlidingTabsBasicFragment.myThread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                SlidingTabsBasicFragment.myThread = null;
+            if (SlidingTabsBasicFragment.myThread == null) {
+                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                SlidingTabsBasicFragment.myThread.start();
             }
-            SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-            SlidingTabsBasicFragment.myThread.start();
             SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
             CallHelper.phone_state=false;
             try {
@@ -345,17 +338,10 @@ public class IncomingCall extends Activity {
             }
         }else{
             SlidingTabsBasicFragment.mViewPager.setCurrentItem(0);
-            if (SlidingTabsBasicFragment.myThread != null) {
-                SlidingTabsBasicFragment.myThread.interrupt();
-                try {
-                    SlidingTabsBasicFragment.myThread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                SlidingTabsBasicFragment.myThread = null;
+            if (SlidingTabsBasicFragment.myThread == null) {
+                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                SlidingTabsBasicFragment.myThread.start();
             }
-            SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-            SlidingTabsBasicFragment.myThread.start();
         }
         /*Intent startIntent = new Intent(IncomingCall.this, MainActivity.class);
         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

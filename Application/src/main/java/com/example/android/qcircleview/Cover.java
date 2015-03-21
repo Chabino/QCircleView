@@ -117,7 +117,7 @@ public class Cover extends Service {
                                 KeyguardManager keyguardManager = (KeyguardManager)getSystemService(Activity.KEYGUARD_SERVICE);
                                 KeyguardManager.KeyguardLock lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
                                 lock.reenableKeyguard();
-                                Intent startIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent startIntent = new Intent(getApplicationContext(), FirstPage.class);
                                 startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(startIntent);
                                 int count1 = 0;
@@ -129,18 +129,8 @@ public class Cover extends Service {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                if (SlidingTabsBasicFragment.myThread != null) {
-                                    SlidingTabsBasicFragment.myThread.interrupt();
-                                    try {
-                                        SlidingTabsBasicFragment.myThread.join();
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    SlidingTabsBasicFragment.myThread = null;
-                                }
-                                Log.i("test", "Thread lancé");
-                                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                                SlidingTabsBasicFragment.myThread.start();
+                                    SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                                    SlidingTabsBasicFragment.myThread.start();
                                 am = 2;
                             }
                         } else if (am == 4) {
@@ -309,8 +299,10 @@ public class Cover extends Service {
                         }
                         SlidingTabsBasicFragment.myThread = null;
                     }
-                    SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                    SlidingTabsBasicFragment.myThread.start();
+                    if (SlidingTabsBasicFragment.myThread == null) {
+                        SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                        SlidingTabsBasicFragment.myThread.start();
+                    }
                     /*SlidingTabsBasicFragment.myThread2 = new Thread(SlidingTabsBasicFragment.runnable2);
                     SlidingTabsBasicFragment.myThread2.start();*/
                     /*try {

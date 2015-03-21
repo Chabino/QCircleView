@@ -114,4 +114,16 @@
             android:background="@drawable/alarm" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="By Chabino.G"
+        android:id="@+id/textView13"
+        android:layout_gravity="right"
+        android:layout_weight="0.03"
+        android:layout_marginTop="142dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#fefffefa"
+        android:textStyle="bold|italic" />
+
 </LinearLayout>

@@ -37,17 +37,10 @@ public class StopWatch extends Activity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 finish();
-                if (SlidingTabsBasicFragment.myThread != null) {
-                    SlidingTabsBasicFragment.myThread.interrupt();
-                    try {
-                        SlidingTabsBasicFragment.myThread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    SlidingTabsBasicFragment.myThread = null;
+                if (SlidingTabsBasicFragment.myThread == null) {
+                    SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                    SlidingTabsBasicFragment.myThread.start();
                 }
-                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                SlidingTabsBasicFragment.myThread.start();
             }
         });
         chronometer = (Chronometer) findViewById(R.id.chronometer);

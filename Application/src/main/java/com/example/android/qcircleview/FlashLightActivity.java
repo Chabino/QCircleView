@@ -62,17 +62,10 @@ public class FlashLightActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                if (SlidingTabsBasicFragment.myThread != null) {
-                    SlidingTabsBasicFragment.myThread.interrupt();
-                    try {
-                        SlidingTabsBasicFragment.myThread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    SlidingTabsBasicFragment.myThread = null;
+                if (SlidingTabsBasicFragment.myThread == null) {
+                    SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                    SlidingTabsBasicFragment.myThread.start();
                 }
-                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                SlidingTabsBasicFragment.myThread.start();
             }
         });
         camera = Camera.open();

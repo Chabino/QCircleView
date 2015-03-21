@@ -123,6 +123,11 @@ public class NotificationListener extends NotificationListenerService {
             for (StatusBarNotification sbn2 : NotificationListener.this.getActiveNotifications()) {
                 if (sbn2.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT) == null) {
                     MainActivity.h[f][0] = sbn2.getNotification().tickerText.toString();
+                    if (sbn2.getNotification().tickerText == null) {
+                        MainActivity.h[f][0] = "";
+                    } else {
+                        MainActivity.h[f][0] = sbn2.getNotification().tickerText.toString();
+                    }
                 } else {
                     MainActivity.h[f][0] = sbn2.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString();
                 }

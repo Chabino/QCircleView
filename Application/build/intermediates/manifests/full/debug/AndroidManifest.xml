@@ -82,6 +82,13 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
+            android:name="com.example.android.qcircleview.FirstPage"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
             android:name="com.example.android.qcircleview.StatusBarToggles"
             android:excludeFromRecents="true"
             android:label="@string/app_name"

@@ -45,6 +45,7 @@ public class Contact extends Activity {
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         contact = true;
         contact1 = this;
+        SlidingTabsBasicFragment.state3=false;
         setContentView(R.layout.contact_view);
         Menu.menu1.finish();
         ImageButton retour5 = (ImageButton) findViewById(R.id.retour5);
@@ -53,17 +54,10 @@ public class Contact extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                if (SlidingTabsBasicFragment.myThread != null) {
-                    SlidingTabsBasicFragment.myThread.interrupt();
-                    try {
-                        SlidingTabsBasicFragment.myThread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    SlidingTabsBasicFragment.myThread = null;
+                if (SlidingTabsBasicFragment.myThread == null) {
+                    SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                    SlidingTabsBasicFragment.myThread.start();
                 }
-                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                SlidingTabsBasicFragment.myThread.start();
             }
         });
         ImageButton phoneapp = (ImageButton) findViewById(R.id.dialer);
@@ -90,20 +84,41 @@ public class Contact extends Activity {
                 keyboard.nextLine();
                 String input = keyboard.nextLine();
                 Log.i("test", "test" + input);
-                MainActivity.mainactivity1.finish();
+                //MainActivity.mainactivity1.finish();
                 startActivity(new Intent(Intent.ACTION_CALL, Uri
                         .parse("tel:" + input)));
+
+                CallHelper.phone_state = true;
+                /*try {
+                    Process su = Runtime.getRuntime().exec("su");
+                    DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                    outputStream.writeBytes("input keyevent 26\n");
+                    outputStream.flush();
+
+                    outputStream.writeBytes("exit\n");
+                    outputStream.flush();
+                    su.waitFor();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+                finish();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(2500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent startIntent = new Intent(getApplication(), MainActivity.class);
+                Intent startIntent = new Intent(Contact.this, MainActivity.class);
                 startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startIntent);
-                SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                SlidingTabsBasicFragment.myThread.start();
-                CallHelper.phone_state = true;
+                if (SlidingTabsBasicFragment.myThread == null) {
+                    SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                    SlidingTabsBasicFragment.myThread.start();
+                }
+                SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
+                CallHelper.phone_state=false;
                 try {
                     Process su = Runtime.getRuntime().exec("su");
                     DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
@@ -119,7 +134,6 @@ public class Contact extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                finish();
             }
         });
         cont = (Button) findViewById(R.id.cont);
@@ -144,20 +158,41 @@ public class Contact extends Activity {
                         keyboard.nextLine();
                         String input = keyboard.nextLine();
                         Log.i("test", "test" + input);
-                        MainActivity.mainactivity1.finish();
+                        //MainActivity.mainactivity1.finish();
                         startActivity(new Intent(Intent.ACTION_CALL, Uri
                                 .parse("tel:" + input)));
+
+                        CallHelper.phone_state = true;
+                        /*try {
+                            Process su = Runtime.getRuntime().exec("su");
+                            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                            outputStream.writeBytes("input keyevent 26\n");
+                            outputStream.flush();
+
+                            outputStream.writeBytes("exit\n");
+                            outputStream.flush();
+                            su.waitFor();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }*/
+                        finish();
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(2500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        Intent startIntent = new Intent(getApplication(), MainActivity.class);
+                        Intent startIntent = new Intent(Contact.this, MainActivity.class);
                         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(startIntent);
-                        SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                        SlidingTabsBasicFragment.myThread.start();
-                        CallHelper.phone_state = true;
+                        if (SlidingTabsBasicFragment.myThread == null) {
+                            SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                            SlidingTabsBasicFragment.myThread.start();
+                        }
+                        SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
+                        CallHelper.phone_state=false;
                         try {
                             Process su = Runtime.getRuntime().exec("su");
                             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
@@ -173,7 +208,6 @@ public class Contact extends Activity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        finish();
                     }
                 });
             }
@@ -199,20 +233,41 @@ public class Contact extends Activity {
                         keyboard.nextLine();
                         String input = keyboard.nextLine();
                         Log.i("test", "test" + input);
-                        MainActivity.mainactivity1.finish();
+                        //MainActivity.mainactivity1.finish();
                         startActivity(new Intent(Intent.ACTION_CALL, Uri
                                 .parse("tel:" + input)));
+
+                        CallHelper.phone_state = true;
+                        /*try {
+                            Process su = Runtime.getRuntime().exec("su");
+                            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                            outputStream.writeBytes("input keyevent 26\n");
+                            outputStream.flush();
+
+                            outputStream.writeBytes("exit\n");
+                            outputStream.flush();
+                            su.waitFor();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }*/
+                        finish();
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(2500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        Intent startIntent = new Intent(getApplication(), MainActivity.class);
+                        Intent startIntent = new Intent(Contact.this, MainActivity.class);
                         startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(startIntent);
-                        SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
-                        SlidingTabsBasicFragment.myThread.start();
-                        CallHelper.phone_state = true;
+                        if (SlidingTabsBasicFragment.myThread == null) {
+                            SlidingTabsBasicFragment.myThread = new Thread(SlidingTabsBasicFragment.runnable);
+                            SlidingTabsBasicFragment.myThread.start();
+                        }
+                        SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
+                        CallHelper.phone_state=false;
                         try {
                             Process su = Runtime.getRuntime().exec("su");
                             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
@@ -228,7 +283,6 @@ public class Contact extends Activity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        finish();
                     }
                 });
             }

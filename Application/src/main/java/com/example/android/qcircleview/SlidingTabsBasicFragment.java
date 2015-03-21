@@ -83,12 +83,21 @@ public class SlidingTabsBasicFragment extends Fragment {
     private static boolean swipe;
     private ImageView img;
     View viewtest;
-    public static Thread myThread;
+    public static Thread myThread=null;
     public static Runnable runnable;
+    public static boolean state3=false;
     private TextView bat;
     public static boolean stateone=false;
 
+    public void onPause(){stateone=false;
+    super.onPause();}
+    public void onResume(){
+        state3=true;
+        stateone=true;
+    super.onResume();}
     public void onDestroy() {
+
+        stateone=false;
         super.onDestroy();
     }
 
@@ -144,6 +153,9 @@ public class SlidingTabsBasicFragment extends Fragment {
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
         stateone=true;
+        if(FirstPage.first) {
+            FirstPage.first1.finish();
+        }
         // END_INCLUDE (setup_slidingtablayout)
     }
 
@@ -197,12 +209,47 @@ public class SlidingTabsBasicFragment extends Fragment {
     class CountDownRunner implements Runnable {
         // @Override
         public void run() {
+            Log.i("Thread Animation","Thread started");
             int anim =0;
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     anim++;
+                    if (anim==9){
+                        if (CallHelper.callReceived){
+                            if (SlidingTabsBasicFragment.myThread != null) {
+                                SlidingTabsBasicFragment.myThread.interrupt();
+                                /*try {
+                                    SlidingTabsBasicFragment.myThread.join();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }*/
+                                SlidingTabsBasicFragment.myThread = null;
+                            }
+                            if (MainActivity.isVisible) {
+                                try {
+                                    Process su = Runtime.getRuntime().exec("su");
+                                    DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                                    outputStream.writeBytes("input keyevent 26\n");
+                                    outputStream.flush();
+
+                                    outputStream.writeBytes("exit\n");
+                                    outputStream.flush();
+                                    //su.waitFor();
+                                } catch (IOException t) {
+                                    t.printStackTrace();
+                                }
+                            }
+                        }
+                    }
                     if (anim==5){
-                        end_rotate_anim.setVisibility(View.INVISIBLE);}
+                        end_rotate_anim.setVisibility(View.INVISIBLE);
+                        if (CallHelper.callReceived) {
+                            if (MainActivity.isVisible) {
+                                SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
+                            }
+                        }
+                    }
                     if (anim == 2){
                         end_rotate_anim = (ImageView) viewtest.findViewById(R.id.animate_plain);
                         rotate_anim = (ImageView) viewtest.findViewById(R.id.animate1);
@@ -224,36 +271,13 @@ public class SlidingTabsBasicFragment extends Fragment {
                         public void onAnimationEnd(Animation animation) {
                             android.util.Log.i("test", "Animation ended");
                             //if (finalAnim ==4) {
-                            try {
+                            /*try {
                                 Thread.sleep(100);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
-                            }
+                            }*/
                                 end_rotate_anim.setVisibility(View.VISIBLE);
                             rotate_anim.setVisibility(View.INVISIBLE);
-                            if (CallHelper.callReceived){
-                                SlidingTabsBasicFragment.mViewPager.setCurrentItem(NotificationListener.call_pos);
-                                try {
-                                    Thread.sleep(1500);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    Process su = Runtime.getRuntime().exec("su");
-                                    DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-                                    outputStream.writeBytes("input keyevent 26\n");
-                                    outputStream.flush();
-
-                                    outputStream.writeBytes("exit\n");
-                                    outputStream.flush();
-                                    su.waitFor();
-                                } catch (IOException t) {
-                                    t.printStackTrace();
-                                } catch (InterruptedException t) {
-                                    t.printStackTrace();
-                                }
-                            }
                             /*if (Cover.threadon){
                                     try {
                                         try {
